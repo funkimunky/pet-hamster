@@ -85,6 +85,8 @@ function get_input() {
     basic.showString("guess")
     let msecs = control.millis()
     while (true) {
+        input.onButtonPressed(Button.A, on_button_pressed_a)
+        input.onButtonPressed(Button.B, on_button_pressed_b)
         basic.showNumber(guess_number)
         msecs_diff = control.millis() - msecs
         if (msecs_diff > 1000) {
@@ -142,34 +144,40 @@ function end() {
     
 }
 
+function on_button_pressed_a() {
+    let guess_number: number;
+    
+    
+    button_pressed = true
+    if (program_state == program_options[1]) {
+        guess_number += 1
+        if (guess_number == 10) {
+            guess_number = 1
+        }
+        
+    }
+    
+    
+}
+
+function on_button_pressed_b() {
+    let guess_number: number;
+    
+    
+    button_pressed = true
+    if (program_state == program_options[1]) {
+        guess_number -= 1
+        if (guess_number == 0) {
+            guess_number = 9
+        }
+        
+    }
+    
+    
+}
+
 basic.forever(function on_forever() {
     progress_game()
-    input.onButtonPressed(Button.A, function on_button_pressed_a() {
-        let guess_number: number;
-        
-        let button_pressed = true
-        if (program_state == program_options[1]) {
-            guess_number += 1
-            if (guess_number == 10) {
-                guess_number = 1
-            }
-            
-        }
-        
-        
-    })
-    input.onButtonPressed(Button.B, function on_button_pressed_b() {
-        let guess_number: number;
-        
-        let button_pressed = true
-        if (program_state == program_options[1]) {
-            guess_number -= 1
-            if (guess_number == 0) {
-                guess_number = 9
-            }
-            
-        }
-        
-        
-    })
+    input.onButtonPressed(Button.A, on_button_pressed_a)
+    input.onButtonPressed(Button.B, on_button_pressed_b)
 })

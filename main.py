@@ -90,6 +90,8 @@ def get_input():
     basic.show_string("guess")
     msecs = control.millis()
     while True:
+        input.on_button_pressed(Button.A, on_button_pressed_a)
+        input.on_button_pressed(Button.B, on_button_pressed_b)
         basic.show_number(guess_number)
         msecs_diff = control.millis() - msecs
         if msecs_diff > 1000:
@@ -143,6 +145,7 @@ def end():
 
 def on_button_pressed_a():
     global program_state
+    global button_pressed
     button_pressed = True
     if program_state == program_options[1]:
         guess_number +=1
@@ -152,6 +155,7 @@ def on_button_pressed_a():
 
 def on_button_pressed_b():
     global program_state
+    global button_pressed
     button_pressed = True
     if program_state == program_options[1]:
         guess_number -=1
